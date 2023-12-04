@@ -8,7 +8,14 @@ module.exports = {
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended'
 	],
-	overrides: [],
+	// overrides: [
+	// 	{
+	// 		files: ['*.ts', '*.tsx'],
+	// 		rules: {
+	// 			'no-mixed-spaces-and-tabs': 'off'
+	// 		}
+	// 	}
+	// ],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
@@ -17,10 +24,12 @@ module.exports = {
 	plugins: ['react', '@typescript-eslint'],
 	rules: {
 		'react/react-in-jsx-scope': 'off',
-		"no-empty-interface": "off",
-		"@typescript-eslint/no-empty-interface": "off",
-		"no-empty-pattern": "off",
-		"@typescript-eslint/no-empty-pattern": "off",
+		'no-empty-interface': 'off',
+		'@typescript-eslint/no-empty-interface': 'off',
+		'no-empty-pattern': 'off',
+		'@typescript-eslint/no-empty-pattern': 'off',
 		'@typescript-eslint/no-empty-function': ['error', { 'allow': ['arrowFunctions'] }],
+		'no-mixed-spaces-and-tabs': 0
 	}
+
 }
