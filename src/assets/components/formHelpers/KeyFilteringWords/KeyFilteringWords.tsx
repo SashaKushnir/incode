@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react'
-import { Button, List, ListItem, SxProps, Theme } from '@mui/material'
+import { Box, Button, List, ListItem, SxProps, Theme } from '@mui/material'
 import { useWatch } from 'react-hook-form'
 import {
 	FilteringConfig,
@@ -26,13 +26,16 @@ const listSx: SxProps<Theme> = ({ palette }) => ({
 	padding: '0px',
 	background: palette.secondary.main,
 	color: palette.primary.dark,
-	maxWidth: '260px',
-	zIndex: 10
+	width: '215px',
+	zIndex: 10,
+	position: 'absolute',
+	top: 0,
+	left: 0
 })
 
 export const KeyFilteringWords: FC<KeyFilteringWordsProps> = ({ open }) => {
 	const formValues = useWatch<FilteringConfig>()
-	console.log(formValues, 'formValues')
+
 	const filterType = formValues.filterType as FilterType
 	const listOptions = useMemo(() => {
 		switch (filterType) {
@@ -48,20 +51,22 @@ export const KeyFilteringWords: FC<KeyFilteringWordsProps> = ({ open }) => {
 	}, [filterType])
 
 	return (
-		<>
+		<Box position={'relative'}>
 			{open && listOptions?.length ? (
-				<List sx={listSx}>
-					{listOptions.map(option => {
-						return (
-							<ListItem sx={listItemSx} key={option}>
-								<FormField sx={fieldSx} name={'values.' + option} />
-							</ListItem>
-						)
-					})}
-				</List>
+				<Box width={'215px'}>
+					<List sx={listSx}>
+						{listOptions.map(option => {
+							return (
+								<ListItem sx={listItemSx} key={option}>
+									<FormField sx={fieldSx} name={'values.' + option} />
+								</ListItem>
+							)
+						})}
+					</List>
+				</Box>
 			) : (
 				<Button sx={SelectOptionButtonSx}>Add key words to find</Button>
 			)}
-		</>
+		</Box>
 	)
 }

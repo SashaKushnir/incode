@@ -1,14 +1,21 @@
 import { FilterCharacter, FilterEpisode, FilterLocation } from './index'
+import { FilteringValues } from '../components/forms/CharactersFilter/CharactersFilter'
 
+export const filterOptionsCreator = (config: FilteringValues) => {
+	return Object.keys(config).reduce((res, curKey) => {
+		if (config[curKey as keyof FilteringValues]) {
+			res += curKey + `: "${config[curKey as keyof FilteringValues]}",`
+		}
+		return res
+	}, '')
+}
 export const charactersFilterQuery = ({
 	page,
-	name,
-	type,
-	status,
-	species,
-	gender
+	...rest
 }: FilterCharacter & { page: number }) => `query character {
-  characters(page: ${page}, filter: { name: ${name}, status: ${status}, species: ${species}, type: ${type}, gender: ${gender}}) {
+  characters(${page ? `page: ${page}` : ''}, filter: { ${filterOptionsCreator(
+		rest
+	)} }) {
         info {
             count
             prev
@@ -16,30 +23,31 @@ export const charactersFilterQuery = ({
             pages
         }
    	  	results {
-          	id
+          id
+					name
+					status
+					species
+					image
+					location {
 						name
-						status
-						species
-						type
-						gender
-						image
-						origin {
-							id
-							name
-						}
+						created
+					}
+					episode {
+						name
+						created
+					}
         }
     }
 }`
 export const episodeFilterQuery = ({
 	page,
-	name,
-	episode
+	...rest
 }: FilterEpisode & {
 	page: number
 }) => `query episodes {
   episodes (
-    page: ${page}
-    filter: {name: ${name},  episode: ${episode}}
+    page: ${page},
+    filter: {${filterOptionsCreator(rest)}}
   ) {
     info {
       count
@@ -50,17 +58,19 @@ export const episodeFilterQuery = ({
       name
       created
       characters {
-        id
-        name
-        status
-        species
-        type
-        gender
-        image
-        origin {
-          id
-          name
-        }
+     		 	id
+					name
+					status
+					species
+					image
+					location {
+						name
+						created
+					}
+					episode {
+						name
+						created
+					}
       }
     }
   }
@@ -68,13 +78,11 @@ export const episodeFilterQuery = ({
 
 export const locationFilterQuery = ({
 	page,
-	name,
-	type,
-	dimension
+	...rest
 }: FilterLocation & {
 	page: number
 }) => `query location {
-	locations (page: ${page}, filter: {name: ${name}, type: ${type}, dimension: ${dimension}}) {
+	locations (page: ${page}, filter: {${filterOptionsCreator(rest)}}) {
     info {
       count
       pages
@@ -87,17 +95,41 @@ export const locationFilterQuery = ({
       dimension
       created
      	residents {
-        id
-        name
-        status
-        species
-        type
-        gender
-        origin {
-          id
-          name
-        }
+      	 	id
+					name
+					status
+					species
+					image
+					location {
+						name
+						created
+					}
+					episode {
+						name
+						created
+				}
       }
+    }
+  }
+}
+`
+export const characterDetailsQuery = (id: string) => `query characterDetails {
+  character (id: ${id}) {
+ 		id
+    name
+    status
+    species
+    type
+    gender
+    image
+    created
+    origin {
+      name
+      type
+      dimension
+    }
+    location {
+      name
     }
   }
 }

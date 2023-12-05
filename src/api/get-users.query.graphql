@@ -14,13 +14,36 @@ query character($page: Int = 1, $name: String, $status: String, $species: String
             name
             status
             species
-            type
-            gender
             image
-            origin {
-                id
+            location {
                 name
+                created
             }
+            episode {
+                name
+                created
+            }
+        }
+    }
+}
+
+query characterDetails($id: ID = 1) {
+    character (id: $id) {
+        id
+        name
+        status
+        species
+        type
+        gender
+        image
+        created
+        origin {
+            name
+            type
+            dimension
+        }
+        location {
+            name
         }
     }
 }
@@ -45,12 +68,14 @@ query location($page: Int = 1, $name: String, $type: String, $dimension: String)
                 name
                 status
                 species
-                type
-                gender
                 image
-                origin {
-                    id
+                location {
                     name
+                    created
+                }
+                episode {
+                    name
+                    created
                 }
             }
         }
@@ -75,12 +100,14 @@ query episodes ($page: Int = 1, $name: String, $episode: String) {
                 name
                 status
                 species
-                type
-                gender
                 image
-                origin {
-                    id
+                location {
                     name
+                    created
+                }
+                episode {
+                    name
+                    created
                 }
             }
         }

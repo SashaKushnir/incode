@@ -1,0 +1,9 @@
+nav > ul > li .Mui-selected {
+  color: rgba(32, 35, 41, 1)!important;
+  background: rgba(245, 245, 245, 1)!important;
+}
+
+nav > ul > li .MuiButtonBase-root, .MuiPaginationItem-root {
+  background: rgba(60, 62, 68, 1);
+  color: rgba(245, 245, 245, 1);
+}

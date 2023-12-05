@@ -29,6 +29,8 @@ module.exports = {
 		'no-empty-pattern': 'off',
 		'@typescript-eslint/no-empty-pattern': 'off',
 		'@typescript-eslint/no-empty-function': ['error', { 'allow': ['arrowFunctions'] }],
+		"no-case-declarations": "off",
+		"@typescript-eslint/no-case-declarations": "off",
 		'no-mixed-spaces-and-tabs': 0
 	}
 

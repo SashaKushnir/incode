@@ -1,10 +1,12 @@
-import { charactersSlice } from './slices/landingDataSlice'
+import { charactersSlice } from './slices/charactersFilterSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
+import { characterDetailsSlice } from './slices/cheracterDetailsSlice'
 
 export const store = configureStore({
 	reducer: {
-		landingData: charactersSlice.reducer
+		charactersFilter: charactersSlice.reducer,
+		characterDetails: characterDetailsSlice.reducer
 	}
 })
 

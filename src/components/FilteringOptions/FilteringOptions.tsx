@@ -17,7 +17,7 @@ export const FilteringOptions: FC = ({}) => {
 	const [showFilter, setShowFilter] = useState(false)
 
 	return (
-		<Box display={'flex'}>
+		<Box display={'flex'} gap={'20px'}>
 			<Button
 				onClick={() => setShowFilter(actual => !actual)}
 				variant={'contained'}

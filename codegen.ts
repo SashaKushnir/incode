@@ -1,7 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
 const apiUrl = process.env.API_URL as string
-console.log('apiUrl', apiUrl)
+
 const config: CodegenConfig = {
 	schema: [
 		{

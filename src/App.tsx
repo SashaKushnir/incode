@@ -6,11 +6,16 @@ import { Header } from './components/Header/Header'
 import { Footer } from './components/Footer/Footer'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './assets/theme-config/theme'
+import { CharacterPage } from './routes/CharacterPage'
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Home />
+	},
+	{
+		path: '/character/:characterId',
+		element: <CharacterPage />
 	}
 ])
 

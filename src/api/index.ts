@@ -214,7 +214,7 @@ export type CharacterQueryVariables = Exact<{
 }>;
 
 
-export type CharacterQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', info?: { __typename?: 'Info', count?: number | null, prev?: number | null, next?: number | null, pages?: number | null } | null, results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, image?: string | null, origin?: { __typename?: 'Location', id?: string | null, name?: string | null } | null } | null> | null } | null };
+export type CharacterQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', info?: { __typename?: 'Info', count?: number | null, prev?: number | null, next?: number | null, pages?: number | null } | null, results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, status?: string | null, species?: string | null, image?: string | null, location?: { __typename?: 'Location', name?: string | null, created?: string | null } | null, episode: Array<{ __typename?: 'Episode', name?: string | null, created?: string | null } | null> } | null> | null } | null };
 
 export type LocationQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -224,17 +224,16 @@ export type LocationQueryVariables = Exact<{
 }>;
 
 
-export type LocationQuery = { __typename?: 'Query', locations?: { __typename?: 'Locations', info?: { __typename?: 'Info', count?: number | null, pages?: number | null, next?: number | null } | null, results?: Array<{ __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null, created?: string | null, residents: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, image?: string | null, origin?: { __typename?: 'Location', id?: string | null, name?: string | null } | null } | null> } | null> | null } | null };
+export type LocationQuery = { __typename?: 'Query', locations?: { __typename?: 'Locations', info?: { __typename?: 'Info', count?: number | null, pages?: number | null, next?: number | null } | null, results?: Array<{ __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null, created?: string | null, residents: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, status?: string | null, species?: string | null, image?: string | null, location?: { __typename?: 'Location', name?: string | null, created?: string | null } | null, episode: Array<{ __typename?: 'Episode', name?: string | null, created?: string | null } | null> } | null> } | null> | null } | null };
 
 export type EpisodesQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
-  dimension?: InputMaybe<Scalars['String']['input']>;
+  episode?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type EpisodesQuery = { __typename?: 'Query', locations?: { __typename?: 'Locations', info?: { __typename?: 'Info', count?: number | null, pages?: number | null, next?: number | null } | null, results?: Array<{ __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null, created?: string | null, residents: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, image?: string | null, origin?: { __typename?: 'Location', id?: string | null, name?: string | null } | null } | null> } | null> | null } | null };
+export type EpisodesQuery = { __typename?: 'Query', episodes?: { __typename?: 'Episodes', info?: { __typename?: 'Info', count?: number | null, pages?: number | null, next?: number | null } | null, results?: Array<{ __typename?: 'Episode', name?: string | null, created?: string | null, characters: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, status?: string | null, species?: string | null, image?: string | null, location?: { __typename?: 'Location', name?: string | null, created?: string | null } | null, episode: Array<{ __typename?: 'Episode', name?: string | null, created?: string | null } | null> } | null> } | null> | null } | null };
 
 
 export const CharacterDocument = gql`
@@ -254,12 +253,14 @@ export const CharacterDocument = gql`
       name
       status
       species
-      type
-      gender
       image
-      origin {
-        id
+      location {
         name
+        created
+      }
+      episode {
+        name
+        created
       }
     }
   }
@@ -324,12 +325,14 @@ export const LocationDocument = gql`
         name
         status
         species
-        type
-        gender
         image
-        origin {
-          id
+        location {
           name
+          created
+        }
+        episode {
+          name
+          created
         }
       }
     }
@@ -373,11 +376,8 @@ export type LocationLazyQueryHookResult = ReturnType<typeof useLocationLazyQuery
 export type LocationSuspenseQueryHookResult = ReturnType<typeof useLocationSuspenseQuery>;
 export type LocationQueryResult = Apollo.QueryResult<LocationQuery, LocationQueryVariables>;
 export const EpisodesDocument = gql`
-    query episodes($page: Int = 1, $name: String, $type: String, $dimension: String) {
-  locations(
-    page: $page
-    filter: {name: $name, type: $type, dimension: $dimension}
-  ) {
+    query episodes($page: Int = 1, $name: String, $episode: String) {
+  episodes(page: $page, filter: {name: $name, episode: $episode}) {
     info {
       count
       pages
@@ -385,20 +385,20 @@ export const EpisodesDocument = gql`
     }
     results {
       name
-      type
-      dimension
       created
-      residents {
+      characters {
         id
         name
         status
         species
-        type
-        gender
         image
-        origin {
-          id
+        location {
           name
+          created
+        }
+        episode {
+          name
+          created
         }
       }
     }
@@ -420,8 +420,7 @@ export const EpisodesDocument = gql`
  *   variables: {
  *      page: // value for 'page'
  *      name: // value for 'name'
- *      type: // value for 'type'
- *      dimension: // value for 'dimension'
+ *      episode: // value for 'episode'
  *   },
  * });
  */

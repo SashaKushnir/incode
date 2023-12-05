@@ -8,6 +8,10 @@ import {
 import { FilterCharacter, FilterEpisode, FilterLocation } from '../../../api'
 import { KeyFilteringWords } from 'assets/components/formHelpers/KeyFilteringWords/KeyFilteringWords'
 import { useAppDispatch } from '../../../store/store'
+import {
+	filterCharacters,
+	setFilteringConfig
+} from '../../../store/slices/charactersFilterSlice'
 
 interface CharactersFilterProps {}
 
@@ -46,7 +50,8 @@ export const CharactersFilter: FC = ({}) => {
 	const d = useAppDispatch()
 
 	const onSubmit: SubmitHandler<FilteringConfig> = values => {
-		// d(filterCharacters(values))
+		d(setFilteringConfig(values))
+		d(filterCharacters())
 	}
 
 	return (
@@ -56,9 +61,16 @@ export const CharactersFilter: FC = ({}) => {
 				<KeyFilteringWords open={open} />
 				<Button
 					sx={SelectOptionButtonSx}
+					style={{
+						borderRadius: '4px',
+						padding: '16px 53px',
+						maxHeight: '57px',
+						maxWidth: '143px'
+					}}
 					onClick={form.handleSubmit(onSubmit)}
-				></Button>
-				{/*<FormInput<FilterType> name={'name'} />*/}
+				>
+					FIND
+				</Button>
 			</Box>
 		</FormProvider>
 	)
