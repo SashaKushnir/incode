@@ -17,6 +17,9 @@ export const theme = createTheme({
 		info: {
 			main: '#4985EF'
 		},
+		warning: {
+			main: 'rgba(60, 62, 68, 1)'
+		},
 		grey: {
 			'100': 'rgba(158, 158, 158, 1)'
 		},

@@ -9,13 +9,20 @@ import {
 } from '../../store/slices/charactersFilterSlice'
 import { useAppDispatch } from '../../store/store'
 import './pagination.css'
+import { FabMenu } from '../../assets/components/FabMenu/FabMenu'
 
 const paginationWrapperSx: SxProps<Theme> = () => ({
 	display: 'flex',
 	justifyContent: 'center',
-	mt: '33px'
+	mt: '33px',
+	position: 'relative'
 })
-
+const fabSx: SxProps<Theme> = ({ palette }) => ({
+	position: 'absolute',
+	right: 0,
+	bottom: 0,
+	transform: 'translate(50%, 0%)'
+})
 export const CharactersPagination: FC = ({}) => {
 	const pagesAmount = useSelector(pagesAmountSelector)
 	const page = useSelector(pageSelector)
@@ -35,6 +42,7 @@ export const CharactersPagination: FC = ({}) => {
 				shape='rounded'
 				onChange={handleChange}
 			/>
+			<FabMenu fabSx={fabSx} />
 		</Box>
 	)
 }

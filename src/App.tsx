@@ -7,6 +7,7 @@ import { Footer } from './components/Footer/Footer'
 import { ThemeProvider } from '@mui/material'
 import { theme } from './assets/theme-config/theme'
 import { CharacterPage } from './routes/CharacterPage'
+import { HistoryDrawer } from './components/Drawer/HistoryDrawer'
 
 const router = createBrowserRouter([
 	{
@@ -25,6 +26,7 @@ function App() {
 			<Header />
 			<RouterProvider router={router} />
 			<Footer />
+			<HistoryDrawer />
 		</ThemeProvider>
 	)
 }

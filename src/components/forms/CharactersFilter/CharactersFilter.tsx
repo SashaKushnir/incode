@@ -12,6 +12,7 @@ import {
 	filterCharacters,
 	setFilteringConfig
 } from '../../../store/slices/charactersFilterSlice'
+import { LocalStore } from '../../../utils/localStorage'
 
 interface CharactersFilterProps {}
 

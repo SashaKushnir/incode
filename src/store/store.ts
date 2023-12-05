@@ -2,11 +2,13 @@ import { charactersSlice } from './slices/charactersFilterSlice'
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { characterDetailsSlice } from './slices/cheracterDetailsSlice'
+import { historyDrawerSlice } from './slices/historyDrawerSlice'
 
 export const store = configureStore({
 	reducer: {
 		charactersFilter: charactersSlice.reducer,
-		characterDetails: characterDetailsSlice.reducer
+		characterDetails: characterDetailsSlice.reducer,
+		historyDrawer: historyDrawerSlice.reducer
 	}
 })
 

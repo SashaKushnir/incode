@@ -8,7 +8,7 @@ export const contentWrapperSx: SxProps<Theme> = ({ palette }) => ({
 	background: palette.primary.dark,
 	padding: '24px 107px'
 })
-const titleSx: SxProps<Theme> = ({ palette }) => ({
+export const pageTitleSx: SxProps<Theme> = ({ palette }) => ({
 	fontSize: '101.25px',
 	fontWeight: 900,
 	color: palette.primary.main,
@@ -22,7 +22,7 @@ export const Home: FC = ({}) => {
 
 	return (
 		<Box>
-			<Box sx={titleSx}>The Rick and Morty API</Box>
+			<Box sx={pageTitleSx}>The Rick and Morty API</Box>
 			<Box sx={contentWrapperSx}>
 				<FilteringOptions />
 				<Characters />

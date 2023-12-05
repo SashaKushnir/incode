@@ -1,43 +1,22 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Character, Characters, Episodes, Locations, Maybe } from '../../api'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { Character } from '../../api'
 import { RootState } from '../store'
-import { GraphQLRequest } from '@apollo/client'
-import {
-	characterDetailsQuery,
-	charactersFilterQuery,
-	episodeFilterQuery,
-	locationFilterQuery
-} from '../../api/queries'
-import {
-	FilteringConfig,
-	FilterType
-} from '../../components/forms/CharactersFilter/CharactersFilter'
-import { getQueryByFilterType, requestCreator } from '../apiHelpers'
+import { characterDetailsQuery } from '../../api/queries'
+import { requestCreator } from '../apiHelpers'
+import { LoadingStatus } from './charactersFilterSlice'
 
-export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-export const baseUrl = 'https://rickandmortyapi.com/graphql'
-
-export enum LoadingStatus {
-	pending = 'Pending',
-	error = 'Error',
-	success = 'Success',
-	none = 'None'
-}
-
-export type CustomCharacters = Required<Omit<Characters, '__typename'>>
-
-interface CharactersState {
+interface CharacterDetailsState {
 	characterDetailsLoadingStatus: LoadingStatus
 	character?: Character
 }
 
-const initialCharactersState: CharactersState = {
+const initialCharacterDetailsState: CharacterDetailsState = {
 	characterDetailsLoadingStatus: LoadingStatus.none
 }
 
 export const characterDetailsSlice = createSlice({
 	name: 'characterDetailsSlice',
-	initialState: initialCharactersState,
+	initialState: initialCharacterDetailsState,
 	reducers: {},
 	extraReducers: builder => {
 		builder

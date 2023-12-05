@@ -7,9 +7,10 @@ import {
 	characterDetailsSelector,
 	fetchCharacterDetails
 } from '../store/slices/cheracterDetailsSlice'
-import { contentWrapperSx } from './Home'
+import { pageTitleSx } from './Home'
 import { CharacterItem } from '../components/Characters/CharacterItem'
 import { useSelector } from 'react-redux'
+import { Loading } from '../assets/components/Loading/Loading'
 
 export const CharacterPage: FC = ({}) => {
 	const { characterId } = useParams<{ characterId: string }>()
@@ -21,23 +22,20 @@ export const CharacterPage: FC = ({}) => {
 		characterId && d(fetchCharacterDetails(characterId))
 	}, [])
 
-	if (isLoading) {
-		return (
-			<Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-				<CircularProgress size={100} />
-			</Box>
-		)
-	}
-	if (!character) {
-		return <></>
-	}
 	return (
-		<Box
-			bgcolor={({ palette }) => palette.primary.dark}
-			minHeight={'600px'}
-			padding={'80px 110px'}
-		>
-			<CharacterItem character={character} expandedVersion />
-		</Box>
+		<>
+			<Box sx={pageTitleSx}>The Rick and Morty API</Box>
+
+			<Box
+				bgcolor={({ palette }) => palette.primary.dark}
+				padding={'80px 110px'}
+			>
+				{isLoading ? (
+					<Loading />
+				) : (
+					<CharacterItem character={character} expandedVersion />
+				)}
+			</Box>
+		</>
 	)
 }

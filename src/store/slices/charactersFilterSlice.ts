@@ -6,6 +6,7 @@ import {
 	FilterType
 } from '../../components/forms/CharactersFilter/CharactersFilter'
 import { getQueryByFilterType, requestCreator } from '../apiHelpers'
+import { LocalStore } from '../../utils/localStorage'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 export const baseUrl = 'https://rickandmortyapi.com/graphql'
@@ -46,6 +47,11 @@ export const charactersSlice = createSlice({
 			state.page = action.payload
 		},
 		setFilteringConfig: (state, action: PayloadAction<FilteringConfig>) => {
+			const prevHistory = LocalStore.get('history')
+			LocalStore.set(
+				'history',
+				prevHistory ? [...prevHistory, action.payload] : [action.payload]
+			)
 			state.filteringConfig = action.payload
 		}
 	},
@@ -146,3 +152,6 @@ export const pagesAmountSelector = (state: RootState) =>
 	state.charactersFilter.charactersInfo.info?.pages || 1
 export const charactersSelector = (state: RootState): Maybe<Character>[] =>
 	state.charactersFilter.charactersInfo?.results || []
+
+export const charactersLoadingStatusSelector = (state: RootState) =>
+	state.charactersFilter.charactersLoadingStatus
