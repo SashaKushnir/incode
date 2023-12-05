@@ -1,33 +1,12 @@
 import React, { FC, useCallback } from 'react'
-import {
-	Box,
-	Drawer,
-	List,
-	ListItem,
-	SxProps,
-	Theme,
-	Typography
-} from '@mui/material'
-import {
-	drawerOpenedSelector,
-	setDrawerOpened
-} from '../../store/slices/historyDrawerSlice'
+import { Box, Drawer, List, ListItem, Typography } from '@mui/material'
+import { setDrawerOpened } from '../../store/slices/historyDrawer/historyDrawerSlice'
 import { useSelector } from 'react-redux'
 import { useAppDispatch } from '../../store/store'
 import { LocalStore } from '../../utils/localStorage'
-import { FilteringValues } from '../forms/CharactersFilter/CharactersFilter'
-
-interface DrawerProps {}
-
-const drawerSx: SxProps<Theme> = () => ({
-	'& .MuiDrawer-paper': {
-		height: '50vh',
-		top: '25%',
-
-		width: '400px',
-		borderRadius: '9px 0px 0px 9px'
-	}
-})
+import { drawerSx } from './drawerStyles'
+import { FilteringValues } from '../../assets/types/types'
+import { drawerOpenedSelector } from '../../store/slices/historyDrawer/selectors'
 
 export const HistoryDrawer: FC = ({}) => {
 	const open = useSelector(drawerOpenedSelector)
@@ -45,7 +24,11 @@ export const HistoryDrawer: FC = ({}) => {
 			<List sx={{ overflow: 'auto' }}>
 				{history?.map((item, index) => {
 					if (item.name)
-						return <ListItem>Character {item.name} was reviewed</ListItem>
+						return (
+							<ListItem key={index}>
+								Character {item.name} was reviewed
+							</ListItem>
+						)
 					else if (item.values || item.filterType) {
 						return (
 							<ListItem key={index}>

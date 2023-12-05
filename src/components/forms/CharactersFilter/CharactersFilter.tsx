@@ -1,49 +1,16 @@
 import React, { FC, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { Box, Button, SxProps, Theme } from '@mui/material'
-import {
-	MultiSelect,
-	SelectOptionButtonSx
-} from '../../../assets/components/formHelpers/MultiSelect/MultiSelect'
-import { FilterCharacter, FilterEpisode, FilterLocation } from '../../../api'
+import { Box, Button } from '@mui/material'
+import { MultiSelect } from '../../../assets/components/formHelpers/MultiSelect/MultiSelect'
 import { KeyFilteringWords } from 'assets/components/formHelpers/KeyFilteringWords/KeyFilteringWords'
 import { useAppDispatch } from '../../../store/store'
-import {
-	filterCharacters,
-	setFilteringConfig
-} from '../../../store/slices/charactersFilterSlice'
-import { LocalStore } from '../../../utils/localStorage'
-
-interface CharactersFilterProps {}
-
-export enum FilterType {
-	Location = 'Location',
-	Character = 'Character',
-	Episode = 'Episode'
-}
-
-export type FilteringValues<T extends FilterType = FilterType.Character> =
-	T extends FilterType.Character
-		? FilterCharacter
-		: T extends FilterType.Location
-		  ? FilterLocation
-		  : T extends FilterType.Episode
-		    ? FilterEpisode
-		    : never
-
-export interface FilteringConfig {
-	filterType: FilterType
-	values: FilteringValues
-}
+import { setFilteringConfig } from '../../../store/slices/charactersFilter/charactersFilterSlice'
+import { SelectOptionButtonSx } from '../../../assets/components/formHelpers/MultiSelect/multiselectStyles'
+import { FilteringConfig, FilterType } from '../../../assets/types/types'
+import { formContainerSx } from './formStyles'
+import { filterCharacters } from '../../../store/requests'
 
 const filteringOptions = Object.values(FilterType) as FilterType[]
-
-const formContainerSx: SxProps<Theme> = () => ({
-	display: 'flex',
-	justifyContent: 'center',
-	width: '100%',
-	gap: '28px'
-})
 
 export const CharactersFilter: FC = ({}) => {
 	const form = useForm<FilteringConfig>()
@@ -51,6 +18,7 @@ export const CharactersFilter: FC = ({}) => {
 	const d = useAppDispatch()
 
 	const onSubmit: SubmitHandler<FilteringConfig> = values => {
+		if (!values.filterType) return
 		d(setFilteringConfig(values))
 		d(filterCharacters())
 	}

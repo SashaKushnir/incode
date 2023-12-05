@@ -1,19 +1,10 @@
 import React, { FC } from 'react'
-import { Box, SxProps, Theme, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import incodeLogoSrc from 'assets/images/incode-icon.svg'
 import githubSrc from 'assets/images/github-icon.svg'
 import twitterSrc from 'assets/images/twitter-icon.svg'
 import supportSrc from 'assets/images/support-icon.svg'
-
-const footerSx: SxProps<Theme> = ({ palette }) => ({
-	background: palette.primary.main,
-	padding: '47px 0 81px 0'
-})
-
-const imgSx: SxProps<Theme> = ({ palette }) => ({
-	width: '18px',
-	height: '18px'
-})
+import { footerSx, imgSx } from './footerStyles'
 
 export const Footer: FC = ({}) => {
 	return (

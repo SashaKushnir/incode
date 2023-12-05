@@ -1,5 +1,6 @@
 import { FilterCharacter, FilterEpisode, FilterLocation } from './index'
-import { FilteringValues } from '../components/forms/CharactersFilter/CharactersFilter'
+
+import { FilteringValues } from '../assets/types/types'
 
 export const filterOptionsCreator = (config: FilteringValues) => {
 	return Object.keys(config).reduce((res, curKey) => {

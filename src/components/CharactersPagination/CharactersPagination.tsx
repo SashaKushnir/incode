@@ -1,28 +1,17 @@
 import React, { ChangeEvent, FC } from 'react'
-import { Box, Pagination, SxProps, Theme } from '@mui/material'
+import { Box, Pagination } from '@mui/material'
 import { useSelector } from 'react-redux'
-import {
-	filterCharacters,
-	pagesAmountSelector,
-	pageSelector,
-	setPage
-} from '../../store/slices/charactersFilterSlice'
+import { setPage } from '../../store/slices/charactersFilter/charactersFilterSlice'
 import { useAppDispatch } from '../../store/store'
 import './pagination.css'
 import { FabMenu } from '../../assets/components/FabMenu/FabMenu'
+import { fabSx, paginationWrapperSx } from './paginationStyles'
+import { filterCharacters } from '../../store/requests'
+import {
+	pagesAmountSelector,
+	pageSelector
+} from '../../store/slices/charactersFilter/selectors'
 
-const paginationWrapperSx: SxProps<Theme> = () => ({
-	display: 'flex',
-	justifyContent: 'center',
-	mt: '33px',
-	position: 'relative'
-})
-const fabSx: SxProps<Theme> = ({ palette }) => ({
-	position: 'absolute',
-	right: 0,
-	bottom: 0,
-	transform: 'translate(50%, 0%)'
-})
 export const CharactersPagination: FC = ({}) => {
 	const pagesAmount = useSelector(pagesAmountSelector)
 	const page = useSelector(pageSelector)

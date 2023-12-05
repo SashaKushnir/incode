@@ -6,34 +6,15 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { downloadCSV } from '../../../utils/downloadCsv'
 import { useSelector } from 'react-redux'
-import { charactersSelector } from '../../../store/slices/charactersFilterSlice'
 import { useAppDispatch } from '../../../store/store'
-import { setDrawerOpened } from '../../../store/slices/historyDrawerSlice'
+import { setDrawerOpened } from '../../../store/slices/historyDrawer/historyDrawerSlice'
+import { buttonSx, menusSx } from './fabMenuStyles'
+import { charactersSelector } from '../../../store/slices/charactersFilter/selectors'
 
 interface FabMenuProps {
 	disableCharactersDownload?: boolean
 	fabSx: SxProps<Theme>
 }
-
-export const buttonSx: SxProps<Theme> = ({ palette }) => ({
-	background: palette.secondary.main,
-	':hover': {
-		background: palette.secondary.contrastText,
-		color: palette.warning.main
-	},
-	':disabled': {
-		background: palette.grey[100]
-	}
-})
-export const menusSx: SxProps<Theme> = ({ palette }) => ({
-	position: 'absolute',
-	bottom: '70px',
-	left: '50%',
-	transform: 'translate(-50%, 0%)',
-	display: 'flex',
-	flexDirection: 'column',
-	gap: '16px'
-})
 
 export const FabMenu: FC<FabMenuProps> = ({
 	disableCharactersDownload,

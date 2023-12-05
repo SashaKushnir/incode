@@ -1,37 +1,15 @@
 import React, { FC, useMemo } from 'react'
-import { Box, Button, List, ListItem, SxProps, Theme } from '@mui/material'
+import { Box, Button, List, ListItem } from '@mui/material'
 import { useWatch } from 'react-hook-form'
-import {
-	FilteringConfig,
-	FilterType
-} from '../../../../components/forms/CharactersFilter/CharactersFilter'
-import { SelectOptionButtonSx } from '../MultiSelect/MultiSelect'
 import { FilterCharacter, FilterEpisode, FilterLocation } from '../../../../api'
 import { FormField } from '../FormField/FormField'
+import { fieldSx, listItemSx, listSx } from './keyWordsStyles'
+import { SelectOptionButtonSx } from '../MultiSelect/multiselectStyles'
+import { FilteringConfig, FilterType } from '../../../types/types'
 
 interface KeyFilteringWordsProps {
 	open: boolean
 }
-
-const fieldSx: SxProps<Theme> = ({ palette }) => ({
-	padding: 0,
-	borderRadius: 0
-})
-
-const listItemSx: SxProps<Theme> = ({ palette }) => ({
-	padding: 0
-})
-const listSx: SxProps<Theme> = ({ palette }) => ({
-	borderRadius: '4px',
-	padding: '0px',
-	background: palette.secondary.main,
-	color: palette.primary.dark,
-	width: '215px',
-	zIndex: 10,
-	position: 'absolute',
-	top: 0,
-	left: 0
-})
 
 export const KeyFilteringWords: FC<KeyFilteringWordsProps> = ({ open }) => {
 	const formValues = useWatch<FilteringConfig>()
@@ -58,7 +36,11 @@ export const KeyFilteringWords: FC<KeyFilteringWordsProps> = ({ open }) => {
 						{listOptions.map(option => {
 							return (
 								<ListItem sx={listItemSx} key={option}>
-									<FormField sx={fieldSx} name={'values.' + option} />
+									<FormField
+										sx={fieldSx}
+										placeholder={option}
+										name={'values.' + option}
+									/>
 								</ListItem>
 							)
 						})}

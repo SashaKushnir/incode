@@ -1,15 +1,15 @@
 import React, { FC, useEffect } from 'react'
 import { Box } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../store/store'
-import {
-	charactersLoadingStatusSelector,
-	charactersSelector,
-	filterCharacters
-} from '../../store/slices/charactersFilterSlice'
 import { Character } from '../../api'
 import { useSelector } from 'react-redux'
 import { CharacterItem } from './CharacterItem'
 import { Loading } from '../../assets/components/Loading/Loading'
+import { filterCharacters } from '../../store/requests'
+import {
+	charactersLoadingStatusSelector,
+	charactersSelector
+} from '../../store/slices/charactersFilter/selectors'
 
 export const Characters: FC = ({}) => {
 	const characters = useSelector(charactersSelector)

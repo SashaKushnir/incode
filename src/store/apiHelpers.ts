@@ -1,15 +1,12 @@
 import {
-	FilteringConfig,
-	FilterType
-} from '../components/forms/CharactersFilter/CharactersFilter'
-import {
 	charactersFilterQuery,
 	episodeFilterQuery,
 	locationFilterQuery
 } from '../api/queries'
 import { GraphQLRequest } from '@apollo/client'
-import { baseUrl, HttpMethod } from './slices/charactersFilterSlice'
+import { FilteringConfig, FilterType, HttpMethod } from '../assets/types/types'
 
+export const baseUrl = 'https://rickandmortyapi.com/graphql'
 export const requestCreator = async (
 	method: HttpMethod,
 	graphqlQuery: Omit<GraphQLRequest, 'query'> & { query: string },

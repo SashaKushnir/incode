@@ -1,8 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Character } from '../../api'
-import { RootState } from '../store'
-import { characterDetailsQuery } from '../../api/queries'
-import { requestCreator } from '../apiHelpers'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface HistoryDrawerState {
 	drawerOpened: boolean
@@ -23,5 +19,3 @@ export const historyDrawerSlice = createSlice({
 })
 
 export const { setDrawerOpened } = historyDrawerSlice.actions
-export const drawerOpenedSelector = (state: RootState) =>
-	state.historyDrawer.drawerOpened

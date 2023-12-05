@@ -1,4 +1,4 @@
-import { FilteringConfig } from '../components/forms/CharactersFilter/CharactersFilter'
+import { FilteringConfig } from '../assets/types/types'
 
 export type History = Array<
 	Partial<FilteringConfig & { name: string; id: string }>
