@@ -23,6 +23,7 @@ export const Footer: FC = ({}) => {
 					fontSize={'14px'}
 					fontWeight={700}
 					mb={'14px'}
+					textAlign={'center'}
 				>
 					PERFORMED AS PART OF A TEST
 					<br /> CASE FOR THE COMPANY

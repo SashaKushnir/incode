@@ -37,7 +37,7 @@ export const Characters: FC = ({}) => {
 					color={({ palette }) => palette.secondary.main}
 					fontSize={'26px'}
 					fontWeight={700}
-					m={'20px'}
+					m={'20px 0'}
 				>
 					No Characters Found
 				</Typography>

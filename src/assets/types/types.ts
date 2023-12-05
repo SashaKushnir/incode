@@ -8,8 +8,8 @@ import {
 } from '../../api'
 
 export enum FilterType {
-	Location = 'Location',
 	Character = 'Character',
+	Location = 'Location',
 	Episode = 'Episode'
 }
 

@@ -2,7 +2,17 @@ import { createTheme } from '@mui/material'
 
 export const theme = createTheme({
 	typography: {
-		fontFamily: 'Roboto, sans-serif' // Use 'Roboto' as the default font family
+		fontFamily: 'Roboto, sans-serif'
+	},
+	components: {
+		MuiCssBaseline: {
+			styleOverrides: `
+        @font-face {
+          font-family: 'Roboto, sans-serif';
+          font-style: normal;
+        }
+      `
+		}
 	},
 	palette: {
 		primary: {

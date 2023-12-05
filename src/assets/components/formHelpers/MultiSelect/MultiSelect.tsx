@@ -5,7 +5,7 @@ import { Box, Button, MenuList } from '@mui/material'
 import { Controller, useFormContext } from 'react-hook-form'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { CustomMenuPopper } from '../../CustomMenuPopper/CustomMenuPopper'
-import { SelectOptionButtonSx } from './multiselectStyles'
+import { menuItemSx, SelectOptionButtonSx } from './multiselectStyles'
 import { FilteringConfig, FilterType } from '../../../types/types'
 
 interface MultiSelectProps {
@@ -38,7 +38,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 			<>
 				<Button
 					ref={anchorRef}
-					id='composition-button'
 					sx={SelectOptionButtonSx}
 					onClick={handleToggle}
 				>
@@ -56,11 +55,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 							<MenuItem
 								onClick={() => handleSelect(option)}
 								key={option}
-								sx={{
-									width: '100%',
-									display: 'flex',
-									justifyContent: 'space-between'
-								}}
+								sx={menuItemSx}
 								value={option}
 							>
 								{option}

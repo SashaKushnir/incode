@@ -6,13 +6,13 @@ import { FabMenu } from '../../assets/components/FabMenu/FabMenu'
 import { LocalStore } from '../../utils/localStorage'
 import {
 	characterContainerSx,
-	characterImgExpandedSx,
 	characterImgSx,
 	fabSx,
 	infoExpandedWrapperSx,
 	infoWrapperSx,
 	statusSx
 } from './charactersStyles'
+import { capitalizeString } from '../../utils/capitalizeLletter'
 
 interface CharacterItemProps {
 	character?: Character
@@ -56,7 +56,8 @@ export const CharacterItem: FC<CharacterItemProps> = ({
 		<Box sx={characterContainerSx}>
 			<Box
 				component={'img'}
-				sx={expandedVersion ? characterImgExpandedSx : characterImgSx}
+				sx={characterImgSx}
+				style={{ height: expandedVersion ? '500px' : '270px' }}
 				src={character?.image || ''}
 				alt={'Character image'}
 			/>
@@ -70,10 +71,10 @@ export const CharacterItem: FC<CharacterItemProps> = ({
 				>
 					{character?.name}
 				</Typography>
-				<Box
+				<Typography
 					display={'flex'}
 					alignItems={'center'}
-					gap={'15px'}
+					gap={'8px'}
 					color={({ palette }) => palette.secondary.main}
 					fontWeight={500}
 					fontSize={'16px'}
@@ -82,8 +83,10 @@ export const CharacterItem: FC<CharacterItemProps> = ({
 						sx={statusSx}
 						bgcolor={statusColorMap[character?.status || 'Unknown']}
 					/>
-					{character?.status + ' - ' + character?.species}
-				</Box>
+					{capitalizeString(character?.status || '') +
+						' - ' +
+						character?.species}
+				</Typography>
 				<CharacterInformationItem
 					title={'Last known location:'}
 					subtitle={character?.location?.name}
@@ -131,7 +134,7 @@ const CharacterInformationItem: FC<CharacterInformationItemProps> = ({
 	subtitle
 }) => {
 	return (
-		<Box>
+		<Box mt={'14px'}>
 			<Typography
 				color={({ palette }) => palette.grey[100]}
 				fontWeight={500}

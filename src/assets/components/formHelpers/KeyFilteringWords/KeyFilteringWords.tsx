@@ -3,9 +3,10 @@ import { Box, Button, List, ListItem } from '@mui/material'
 import { useWatch } from 'react-hook-form'
 import { FilterCharacter, FilterEpisode, FilterLocation } from '../../../../api'
 import { FormField } from '../FormField/FormField'
-import { fieldSx, listItemSx, listSx } from './keyWordsStyles'
+import { fieldSx, inputPropsSx, listItemSx, listSx } from './keyWordsStyles'
 import { SelectOptionButtonSx } from '../MultiSelect/multiselectStyles'
 import { FilteringConfig, FilterType } from '../../../types/types'
+import { capitalizeString } from '../../../../utils/capitalizeLletter'
 
 interface KeyFilteringWordsProps {
 	open: boolean
@@ -38,7 +39,10 @@ export const KeyFilteringWords: FC<KeyFilteringWordsProps> = ({ open }) => {
 								<ListItem sx={listItemSx} key={option}>
 									<FormField
 										sx={fieldSx}
-										placeholder={option}
+										placeholder={'Add ' + capitalizeString(option)}
+										InputProps={{
+											sx: inputPropsSx
+										}}
 										name={'values.' + option}
 									/>
 								</ListItem>

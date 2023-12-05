@@ -1,15 +1,11 @@
 import { SxProps, Theme } from '@mui/material'
 
 export const characterImgSx: SxProps<Theme> = ({ palette }) => ({
-	width: '229px',
-	height: '220px',
+	width: 'auto',
+	height: '100%',
 	borderRadius: '9px'
 })
-export const characterImgExpandedSx: SxProps<Theme> = ({ palette }) => ({
-	width: '595px',
-	height: '572px',
-	borderRadius: '9px'
-})
+
 export const statusSx: SxProps<Theme> = () => ({
 	width: '9px',
 	height: '9px',

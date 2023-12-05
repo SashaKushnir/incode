@@ -42,7 +42,7 @@ export const FormField = <T extends FieldValues>({
 				id={name}
 				{...props}
 				{...register(name as Path<T>)}
-				error={isInvalid} // Set the error prop based on the presence of an error
+				error={isInvalid}
 			/>
 		</FormControl>
 	)
