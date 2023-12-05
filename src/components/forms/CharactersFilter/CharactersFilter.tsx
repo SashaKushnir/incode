@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { Box, Button } from '@mui/material'
 import { MultiSelect } from '../../../assets/components/formHelpers/MultiSelect/MultiSelect'
@@ -12,7 +12,13 @@ import { filterCharacters } from '../../../store/requests'
 
 const filteringOptions = Object.values(FilterType) as FilterType[]
 
-export const CharactersFilter: FC = ({}) => {
+interface CharactersFilterProps {
+	setShowFilter: Dispatch<SetStateAction<boolean>>
+}
+
+export const CharactersFilter: FC<CharactersFilterProps> = ({
+	setShowFilter
+}) => {
 	const form = useForm<FilteringConfig>()
 	const [open, setOpen] = useState(false)
 	const d = useAppDispatch()
@@ -21,6 +27,8 @@ export const CharactersFilter: FC = ({}) => {
 		if (!values.filterType) return
 		d(setFilteringConfig(values))
 		d(filterCharacters())
+		form.reset()
+		setShowFilter(false)
 	}
 
 	return (

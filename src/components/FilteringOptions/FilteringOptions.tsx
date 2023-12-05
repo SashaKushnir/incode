@@ -15,7 +15,7 @@ export const FilteringOptions: FC = ({}) => {
 			>
 				{showFilter ? 'Remove Filter' : 'Filter'}
 			</Button>
-			{showFilter && <CharactersFilter />}
+			{showFilter && <CharactersFilter setShowFilter={setShowFilter} />}
 		</Box>
 	)
 }
