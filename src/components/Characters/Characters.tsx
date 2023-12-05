@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import { Character } from '../../api'
 import { useSelector } from 'react-redux'
@@ -32,6 +32,16 @@ export const Characters: FC = ({}) => {
 				mt: '20px'
 			}}
 		>
+			{!characters.length && (
+				<Typography
+					color={({ palette }) => palette.secondary.main}
+					fontSize={'26px'}
+					fontWeight={700}
+					m={'20px'}
+				>
+					No Characters Found
+				</Typography>
+			)}
 			{characters.map(character => {
 				return (
 					<CharacterItem
